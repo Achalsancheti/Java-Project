@@ -1,0 +1,581 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package UserInterface.PatientRole;
+
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.MainUserAccount.MainUserAccount;
+import Business.Organization.PatientOrganization;
+import Business.WorkQueue.DoctorTestWorkRequest;
+import Business.WorkQueue.SmartWatchWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import UserInterface.DoctorRole.CalculateVitalSignJPanel;
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
+import java.awt.Canvas;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import uk.co.caprica.vlcj.player.embedded.x.XFullScreenStrategy;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+
+/**
+ *
+ * @author Achal Sancheti
+ */
+public class SmartWatchJPanel extends javax.swing.JPanel {
+    
+    JPanel userProcessContainer;
+    MainUserAccount account;
+    Enterprise enterprise;
+    PatientOrganization patientOrganization;
+    DoctorTestWorkRequest doctorTestWorkRequest;
+    EcoSystem business;
+
+    /**
+     * Creates new form SmartWatchJPanel
+     */
+    public SmartWatchJPanel(JPanel userProcessContainer,Enterprise enterprise,MainUserAccount account,PatientOrganization patientOrganization,EcoSystem business) {
+        initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.account=account;
+        this.patientOrganization=patientOrganization;
+        this.enterprise=enterprise;
+        this.business=business;
+        populateTable();
+        vitalrange();
+    }
+    
+    public void vitalrange(){
+        for(WorkRequest request:account.getWorkQueue().getWorkRequestList()){
+            if(request instanceof DoctorTestWorkRequest)
+        if((request.getAge()>0) && (request.getAge()<=10)){}
+            lable1.setText("20");
+            lable2.setText("30");
+            lable3.setText("80");
+            lable4.setText("110");
+            lable5.setText("80");
+            lable6.setText("110");
+            lable7.setText("22");
+            lable8.setText("31");
+        
+        
+        if((request.getAge()>10) && (request.getAge()<=20)){}
+            lable1.setText("20");
+            lable2.setText("30");
+            lable3.setText("70");
+            lable4.setText("120");
+            lable5.setText("80");
+            lable6.setText("110");
+            lable7.setText("31");
+            lable8.setText("40");
+        
+        
+        if((request.getAge()>20) && (request.getAge()<=30)){}
+            lable1.setText("15");
+            lable2.setText("25");
+            lable3.setText("60");
+            lable4.setText("110");
+            lable5.setText("80");
+            lable6.setText("120");
+            lable7.setText("41");
+            lable8.setText("92");
+        
+        
+        if((request.getAge()>30)){}
+            lable1.setText("15");
+            lable2.setText("25");
+            lable3.setText("60");
+            lable4.setText("110");
+            lable5.setText("80");
+            lable6.setText("120");
+            lable7.setText("41");
+            lable8.setText("92");
+        
+    }
+    }
+    
+
+    public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) Table.getModel();
+        
+        model.setRowCount(0);
+        for (WorkRequest request: account.getWorkQueue().getWorkRequestList()){
+            
+            if(request instanceof SmartWatchWorkRequest){
+            Object[] row = new Object[7];
+
+            String condition = ((SmartWatchWorkRequest)request).getCondition();
+            row[0] = request;
+            int respiratory = ((SmartWatchWorkRequest)request).getRespiratoryRate();
+            row[1] = respiratory;
+            int heart = ((SmartWatchWorkRequest)request).getHeartRate();
+            row[2] = heart;
+            int blood = ((SmartWatchWorkRequest)request).getBloodPressure();
+            row[3] = blood;
+            float weight = ((SmartWatchWorkRequest)request).getWeight();
+            row[4] = weight;
+            row[5] = request.getDate();
+            row[6] = request.getTime();
+            
+            model.addRow(row);
+            }
+        }
+    }
+    
+    
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Table = new javax.swing.JTable();
+        backButton = new javax.swing.JButton();
+        sendvideoButton = new javax.swing.JButton();
+        viewvideoButton = new javax.swing.JButton();
+        nearbystoreButton = new javax.swing.JButton();
+        nearbyhospitalButton = new javax.swing.JButton();
+        calculateButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lable1 = new javax.swing.JLabel();
+        lable2 = new javax.swing.JLabel();
+        lable3 = new javax.swing.JLabel();
+        lable4 = new javax.swing.JLabel();
+        lable5 = new javax.swing.JLabel();
+        lable6 = new javax.swing.JLabel();
+        lable7 = new javax.swing.JLabel();
+        lable8 = new javax.swing.JLabel();
+        doorButton = new javax.swing.JButton();
+        messageButton = new javax.swing.JButton();
+        bookappointmentButton = new javax.swing.JButton();
+        seeclimateButton = new javax.swing.JButton();
+        chatButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Condition", "Respiratory Rate", "Heart Rate", "Blood Pressure", "Weight", "Date", "Time"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(Table);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 89, 770, 160));
+
+        backButton.setBackground(new java.awt.Color(0, 0, 0));
+        backButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("<<Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, 33));
+
+        sendvideoButton.setBackground(new java.awt.Color(0, 0, 0));
+        sendvideoButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        sendvideoButton.setForeground(new java.awt.Color(255, 255, 255));
+        sendvideoButton.setText("Send Video To Doctor");
+        sendvideoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendvideoButtonActionPerformed(evt);
+            }
+        });
+        add(sendvideoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 100, 250, 35));
+
+        viewvideoButton.setBackground(new java.awt.Color(0, 0, 0));
+        viewvideoButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        viewvideoButton.setForeground(new java.awt.Color(255, 255, 255));
+        viewvideoButton.setText("View Doctor's Video");
+        viewvideoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewvideoButtonActionPerformed(evt);
+            }
+        });
+        add(viewvideoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 40, 250, 35));
+
+        nearbystoreButton.setBackground(new java.awt.Color(0, 0, 0));
+        nearbystoreButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nearbystoreButton.setForeground(new java.awt.Color(255, 255, 255));
+        nearbystoreButton.setText("View Nearby Drug Stores");
+        nearbystoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nearbystoreButtonActionPerformed(evt);
+            }
+        });
+        add(nearbystoreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 220, 250, 35));
+
+        nearbyhospitalButton.setBackground(new java.awt.Color(0, 0, 0));
+        nearbyhospitalButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nearbyhospitalButton.setForeground(new java.awt.Color(255, 255, 255));
+        nearbyhospitalButton.setText("View Nearby Hospitals");
+        nearbyhospitalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nearbyhospitalButtonActionPerformed(evt);
+            }
+        });
+        add(nearbyhospitalButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 160, 250, 35));
+
+        calculateButton.setBackground(new java.awt.Color(0, 0, 0));
+        calculateButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        calculateButton.setForeground(new java.awt.Color(255, 255, 255));
+        calculateButton.setText("Calculate");
+        calculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateButtonActionPerformed(evt);
+            }
+        });
+        add(calculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(512, 310, 130, 33));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Respiratory Rate:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Heart Rate:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Blood Pressure:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Weight:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Lower Limit");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Upper Limit");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
+
+        lable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable1.setForeground(new java.awt.Color(0, 0, 153));
+        lable1.setText("Updating");
+        add(lable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
+
+        lable2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable2.setForeground(new java.awt.Color(0, 0, 153));
+        lable2.setText("Updating");
+        add(lable2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, -1, -1));
+
+        lable3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable3.setForeground(new java.awt.Color(0, 0, 153));
+        lable3.setText("Updating");
+        add(lable3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
+
+        lable4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable4.setForeground(new java.awt.Color(0, 0, 153));
+        lable4.setText("Updating");
+        add(lable4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, -1, -1));
+
+        lable5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable5.setForeground(new java.awt.Color(0, 0, 153));
+        lable5.setText("Updating");
+        add(lable5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, -1, -1));
+
+        lable6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable6.setForeground(new java.awt.Color(0, 0, 153));
+        lable6.setText("Updating");
+        add(lable6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, -1, -1));
+
+        lable7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable7.setForeground(new java.awt.Color(0, 0, 153));
+        lable7.setText("Updating");
+        add(lable7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
+
+        lable8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lable8.setForeground(new java.awt.Color(0, 0, 153));
+        lable8.setText("Updating");
+        add(lable8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
+
+        doorButton.setBackground(new java.awt.Color(0, 0, 0));
+        doorButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        doorButton.setForeground(new java.awt.Color(255, 255, 255));
+        doorButton.setText("View Doors Information");
+        doorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doorButtonActionPerformed(evt);
+            }
+        });
+        add(doorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 390, 250, 35));
+
+        messageButton.setBackground(new java.awt.Color(0, 0, 0));
+        messageButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        messageButton.setForeground(new java.awt.Color(255, 255, 255));
+        messageButton.setText("Send Emergency Message");
+        messageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                messageButtonActionPerformed(evt);
+            }
+        });
+        add(messageButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 450, 250, 35));
+
+        bookappointmentButton.setBackground(new java.awt.Color(0, 0, 0));
+        bookappointmentButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bookappointmentButton.setForeground(new java.awt.Color(255, 255, 255));
+        bookappointmentButton.setText("Book Appointment");
+        bookappointmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookappointmentButtonActionPerformed(evt);
+            }
+        });
+        add(bookappointmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 510, 250, 33));
+
+        seeclimateButton.setBackground(new java.awt.Color(0, 0, 0));
+        seeclimateButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        seeclimateButton.setForeground(new java.awt.Color(255, 255, 255));
+        seeclimateButton.setText("See Climate");
+        seeclimateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeclimateButtonActionPerformed(evt);
+            }
+        });
+        add(seeclimateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 340, 250, 33));
+
+        chatButton.setBackground(new java.awt.Color(0, 0, 0));
+        chatButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chatButton.setForeground(new java.awt.Color(255, 255, 255));
+        chatButton.setText("Chat With Doctor");
+        chatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chatButtonActionPerformed(evt);
+            }
+        });
+        add(chatButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 220, 33));
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Send Email");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 280, 250, 33));
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void sendvideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendvideoButtonActionPerformed
+        int dialogButton = JOptionPane.YES_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Would You Like To Send The Video To Doctor?");
+        if(dialogResult==JOptionPane.YES_OPTION){
+        JOptionPane.showMessageDialog(null, "Video Has Been Successfully Sent To Doctor","Success",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_sendvideoButtonActionPerformed
+
+    private void viewvideoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewvideoButtonActionPerformed
+
+        int dialogButton = JOptionPane.YES_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Would You Like To See The Video?");
+        if(dialogResult==JOptionPane.YES_OPTION){
+        Canvas c = new Canvas();
+        c.setBackground(Color.black);
+
+        JFrame f = new JFrame();
+        f.add(c);
+        f.setLocation(360,200);
+        f.setSize(600, 450);
+        f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        f.setVisible(true);
+
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),"C:\\VLC");
+        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+
+        MediaPlayerFactory mpf = new MediaPlayerFactory();
+
+        EmbeddedMediaPlayer emp = mpf.newEmbeddedMediaPlayer(new XFullScreenStrategy(f));
+
+        emp.setVideoSurface(mpf.newVideoSurface(c));
+
+        emp.setEnableMouseInputHandling(false);
+        emp.setEnableKeyInputHandling(false);
+
+        String file = "C:\\doctorsendvideo.mp4";
+        emp.prepareMedia(file);
+        emp.play();
+        }
+    }//GEN-LAST:event_viewvideoButtonActionPerformed
+
+    private void nearbystoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nearbystoreButtonActionPerformed
+
+        int dialogButton = JOptionPane.YES_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Would You Like To See Nearby Drug Stores?");
+        if(dialogResult==JOptionPane.YES_OPTION){
+        if(Desktop.isDesktopSupported())
+        {
+            try {
+                Desktop.getDesktop().browse(new URI("https://www.google.com/maps/search/nearby+drug+stores/@42.3357713,-71.1241299,14z/data=!3m1!4b1"));
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(CalculateVitalSignJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CalculateVitalSignJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        }
+    }//GEN-LAST:event_nearbystoreButtonActionPerformed
+
+    private void nearbyhospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nearbyhospitalButtonActionPerformed
+        
+        int dialogButton = JOptionPane.YES_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Would You Like To See Nearby Hospitals?");
+        if(dialogResult==JOptionPane.YES_OPTION){
+        if(Desktop.isDesktopSupported())
+        {
+            try {
+                Desktop.getDesktop().browse(new URI("https://www.google.com/maps/search/medical+hospital/@42.337781,-71.1074531,16z"));
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(CalculateVitalSignJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CalculateVitalSignJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        }
+    }//GEN-LAST:event_nearbyhospitalButtonActionPerformed
+
+    private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
+
+            PatientVitalSignJPanel patientVitalSignJPanel = new PatientVitalSignJPanel(userProcessContainer, account,enterprise,business);
+            userProcessContainer.add("PatientVitalSignJPanel", patientVitalSignJPanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+    }//GEN-LAST:event_calculateButtonActionPerformed
+
+    private void doorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doorButtonActionPerformed
+        
+        ManageDoorsJPanel manageDoorsJPanel = new ManageDoorsJPanel(userProcessContainer, account,enterprise);
+        userProcessContainer.add("ManageDoorsJPanel", manageDoorsJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_doorButtonActionPerformed
+
+    private void messageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_messageButtonActionPerformed
+        
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, account,enterprise);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
+        
+    }//GEN-LAST:event_messageButtonActionPerformed
+
+    private void bookappointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookappointmentButtonActionPerformed
+        BookAppointmentJPanel bookAppointmentJPanel = new BookAppointmentJPanel(userProcessContainer, account,enterprise,business);
+        userProcessContainer.add("BookAppointmentJPanel", bookAppointmentJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_bookappointmentButtonActionPerformed
+
+    private void seeclimateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeclimateButtonActionPerformed
+        int dialogButton = JOptionPane.YES_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Would You Like To See The Climate?");
+        if(dialogResult==JOptionPane.YES_OPTION){
+        TemperatureJFrame s = new TemperatureJFrame();
+        s.setVisible(true);
+        s.setLocation(360,200);
+        s.setSize(600, 450);
+        s.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        }
+    }//GEN-LAST:event_seeclimateButtonActionPerformed
+
+    private void chatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatButtonActionPerformed
+        int dialogButton = JOptionPane.YES_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Would You Like To Do Chat With Doctor?");
+        if(dialogResult==JOptionPane.YES_OPTION){
+            ChatPatientJFrame cpjf = new ChatPatientJFrame();
+            cpjf.setVisible(true);
+            cpjf.setLocation(360,200);
+            cpjf.setSize(550,500);
+            cpjf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        }
+    }//GEN-LAST:event_chatButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SendEmailJFrame send = new SendEmailJFrame();
+        send.setVisible(true);
+        send.setLocation(360,200);
+        send.setSize(550,600);
+        send.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton bookappointmentButton;
+    private javax.swing.JButton calculateButton;
+    private javax.swing.JButton chatButton;
+    private javax.swing.JButton doorButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lable1;
+    private javax.swing.JLabel lable2;
+    private javax.swing.JLabel lable3;
+    private javax.swing.JLabel lable4;
+    private javax.swing.JLabel lable5;
+    private javax.swing.JLabel lable6;
+    private javax.swing.JLabel lable7;
+    private javax.swing.JLabel lable8;
+    private javax.swing.JButton messageButton;
+    private javax.swing.JButton nearbyhospitalButton;
+    private javax.swing.JButton nearbystoreButton;
+    private javax.swing.JButton seeclimateButton;
+    private javax.swing.JButton sendvideoButton;
+    private javax.swing.JButton viewvideoButton;
+    // End of variables declaration//GEN-END:variables
+}
